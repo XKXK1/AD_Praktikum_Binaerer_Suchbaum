@@ -15,7 +15,7 @@ import java.util.Queue;
  *         in einer vom Enum "Reihenfolge" gegebenen reihenfolgen auszugeben.
  *
  */
-public class BaumVerlinkt<T> implements Baum<T> {
+public class BaumVerlinkt<T extends Comparable<T>> implements Baum<T> {
 	Knoten<T> wurzel;
 	boolean insertSucces = false;
 	int position = 0;
@@ -45,30 +45,32 @@ public class BaumVerlinkt<T> implements Baum<T> {
 		Knoten<T> node = new Knoten<T>(value);
 		if (wurzel == null) {
 			wurzel = node;
-			return;
+		} else {
+			knotenEinfuegen2(wurzel, value);
 		}
-		Queue<Knoten<T>> queue = new LinkedList<Knoten<T>>();
-		queue.offer(wurzel);
+	}
 
-		while (true) {
+	private void knotenEinfuegen2(Knoten<T> node, T value) {
+		Knoten<T> knoten = new Knoten<T>(value);
 
-			Knoten<T> n = queue.remove();
-			if (n.getLinks() == null) {
-				n.setLinks(node);
-				n.getLinks().setVater(node);
-				break;
+		if (value.compareTo(node.getInhalt()) == -1) {
+			if (node.getLinks() == null) {
+				node.setLinks(knoten);
 			} else {
-				queue.offer(n.getLinks());
+				knotenEinfuegen2(node.getLinks(), value);
 			}
 
-			if (n.getRechts() == null) {
-				n.setRechts(node);
-				n.getRechts().setVater(node);
-				break;
+		} else if (value.compareTo(node.getInhalt()) == 1) {
+			if (node.getRechts() == null) {
+				node.setRechts(knoten);
 			} else {
-				queue.offer(n.getRechts());
+				knotenEinfuegen2(node.getRechts(), value);
 			}
+
+		} else {
+			System.out.println("Value existiert bereits!");
 		}
+
 	}
 
 	/**

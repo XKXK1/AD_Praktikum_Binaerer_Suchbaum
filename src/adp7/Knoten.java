@@ -9,7 +9,7 @@ package adp7;
  *         Jeder Knoten kann einen Inhalt des jeweilig festgelegten Typen haben.
  *
  */
-public class Knoten<T> {
+public class Knoten<T extends Comparable<T>> {
 	private T inhalt;
 
 	private Knoten<T> links;
@@ -50,5 +50,9 @@ public class Knoten<T> {
 	public void setVater(Knoten<T> vater) {
 		Vater = vater;
 	}
+
+
+
+
 
 }

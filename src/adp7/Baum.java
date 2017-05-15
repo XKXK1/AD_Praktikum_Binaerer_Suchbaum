@@ -8,7 +8,7 @@ package adp7;
  *         Baums. Die Schnittstelle verfuegt ueber zwei Methoden.
  *
  */
-public interface Baum<T> {
+public interface Baum<T>  {
 	/**
 	 * 
 	 * Die Methode knotenAusgeben erwartet ein Argument vom Enum Reihenfolge. Es

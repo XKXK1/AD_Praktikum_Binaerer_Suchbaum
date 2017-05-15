@@ -12,7 +12,7 @@ package adp7;
  *         gegebenen reihenfolgen auszugeben.
  *
  */
-public class BaumArray<T> implements Baum<T> {
+public class BaumArray<T extends Comparable<T>> implements Baum<T> {
 
 	private Object[] array;
 	private int baumGroesse;
@@ -23,8 +23,8 @@ public class BaumArray<T> implements Baum<T> {
 	 * Platz fuer einen Wurzelknoten und zwei Soehne hat(3 Knoten).
 	 */
 	public BaumArray() {
-		array = new Object[3];
-		arrayLaenge = 3;
+		array = new Object[4];
+		arrayLaenge = 4;
 		baumGroesse = 1;
 	}
 
@@ -112,26 +112,55 @@ public class BaumArray<T> implements Baum<T> {
 
 	@Override
 	public void knotenEinfuegen(T value) {
-		new Knoten<T>(value);
+		Knoten<T> knoten = new Knoten<T>(value);
 
-		// test
-		if (baumGroesse + 1 == arrayLaenge) {
-			Object[] temp = new Object[arrayLaenge * 2];
-			System.arraycopy(array, 0, temp, 0, arrayLaenge);
-			array = temp;
+		if (array[1] == null) {
+			array[1] = knoten;
+			baumGroesse++;
+		} else {
+			knotenEinfuegen2(value, 1);
+		}
+	}
+
+	private void knotenEinfuegen2(T value, int i) {
+		if (i * 2 + 1 > arrayLaenge) {
+			Object[] swap = new Object[arrayLaenge * 2];
+			System.arraycopy(array, 0, swap, 0, arrayLaenge);
+			array = swap;
 			arrayLaenge = arrayLaenge * 2;
 		}
-		array[baumGroesse] = new Knoten<T>(value);
-		baumGroesse++;
+
+		if (value.compareTo(((Knoten<T>) array[i]).getInhalt()) == -1) {
+			if (array[2 * i] == null) {
+				Knoten<T> knoten = new Knoten<T>(value);
+				array[2 * i] = knoten;
+				baumGroesse++;
+			} else {
+				knotenEinfuegen2(value, 2 * i);
+
+			}
+		} else if (value.compareTo(((Knoten<T>) array[i]).getInhalt()) == 1) {
+			if (array[2 * i + 1] == null) {
+				Knoten<T> knoten = new Knoten<T>(value);
+				array[2 * i + 1] = knoten;
+				baumGroesse++;
+			} else {
+				knotenEinfuegen2(value, 2 * i + 1);
+
+			}
+		} else {
+			System.out.println("Value existiert bereits");
+		}
+
 	}
 
 	public static void main(String[] args) {
 
 		BaumArray<Integer> baum1 = new BaumArray<Integer>();
-		baum1.knotenEinfuegen(5);
+		baum1.knotenEinfuegen(50);
 		baum1.knotenEinfuegen(10);
-		baum1.knotenEinfuegen(15);
-		baum1.knotenEinfuegen(20);
+		baum1.knotenEinfuegen(25);
+		baum1.knotenEinfuegen(5);
 		baum1.knotenEinfuegen(25);
 		baum1.knotenEinfuegen(30);
 		baum1.knotenEinfuegen(35);
