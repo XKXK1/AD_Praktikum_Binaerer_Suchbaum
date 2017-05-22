@@ -164,7 +164,7 @@ public class BaumArray<T extends Comparable<T>> implements Baum<T> {
 		baum1.knotenEinfuegen(25);
 		baum1.knotenEinfuegen(30);
 		baum1.knotenEinfuegen(35);
-		baum1.knotenAusgeben(Reihenfolge.INORDER);
+		baum1.knotenAusgeben(Reihenfolge.POSTORDER);
 
 	}
 

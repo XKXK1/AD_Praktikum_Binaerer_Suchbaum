@@ -11,17 +11,33 @@ package adp7;
  */
 public class Knoten<T extends Comparable<T>> {
 	private T inhalt;
+	
+    private int sum;
+
 
 	private Knoten<T> links;
 	private Knoten<T> rechts;
 	private Knoten<T> Vater;
 
 	public Knoten(T inhalt) {
+		sum =(int) inhalt;
 		this.links = null;
 		this.rechts = null;
 		this.inhalt = inhalt;
 
 	}
+	
+	 public void addToSum(int value) {
+	        sum += value;
+	    }
+	 
+	 public int getSum() {
+	        return sum;
+	    }
+	 
+	 public void setSum(int sum) {
+	        this.sum = sum;
+	    }
 
 	public T getInhalt() {
 		return inhalt;

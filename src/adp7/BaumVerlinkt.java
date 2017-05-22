@@ -1,8 +1,5 @@
 package adp7;
 
-import java.util.LinkedList;
-import java.util.Queue;
-
 /**
  * 
  * @author Derya Uyargil
@@ -71,6 +68,8 @@ public class BaumVerlinkt<T extends Comparable<T>> implements Baum<T> {
 			System.out.println("Value existiert bereits!");
 		}
 
+		node.addToSum((int) value);
+
 	}
 
 	/**
@@ -131,17 +130,81 @@ public class BaumVerlinkt<T extends Comparable<T>> implements Baum<T> {
 		System.out.print("  " + knoten.getInhalt());
 	}
 
+	public int sumBetweenMinMax(int min, int max) {
+		if (min > max) {
+			int temp = min;
+			min = max;
+			max = temp;			
+		}
+		return wurzel.getSum() - getMaxRightside((Knoten<Integer>) wurzel, max)
+				- getMinLeftside((Knoten<Integer>) wurzel, min);
+	}
+
+	private int getMinLeftside(Knoten<Integer> current, int MinLimit) {
+		if (current == null) {
+			return 0;
+		}
+		// alles was kleiner ist muss subtrahiert werden
+		if (current.getInhalt() == MinLimit) {
+			if (current.getLinks() != null) {
+				return current.getLinks().getSum();
+			} else {
+				return 0;
+			}
+		// Zahl noch nicht bei minimum angekommen (von 0)
+		} else if (current.getInhalt() > MinLimit) {
+			return getMinLeftside(current.getLinks(), MinLimit);
+		} else {
+			// Falls das min noch nicht erreicht ist, aber nach rechts gegangen
+			// werden muss weil min nicht links liegt muessen alle Zahlen die
+			// bis zum erreich von min kommen mit abgezogen werden weil diese
+			// ausserhalb des bereiches der gewünschten summe liegen
+			int subtraktionsAkkumulation = current.getInhalt();
+			if (current.getLinks() != null) {
+				subtraktionsAkkumulation += current.getLinks().getSum();
+			}
+			// Naechster Aufruf mit subtraktionszusatz da min noch nicht
+			// erreicht wurde von unten gesehen
+			return subtraktionsAkkumulation + getMinLeftside(current.getRechts(), MinLimit);
+		}
+	}
+
+	private int getMaxRightside(Knoten<Integer> current, int maxLimit) {
+		if (current == null) {
+			return 0;
+		}
+		// alles was groesser ist muss subtrahiert werden
+		if (current.getInhalt() == maxLimit) {
+			if (current.getRechts() != null) {
+				return current.getRechts().getSum();
+			} else {
+				return 0;
+			}
+
+		// Zahl noch nicht bei maximum angekommen (von 0)
+		} else if (current.getInhalt() < maxLimit) {
+			return getMaxRightside(current.getRechts(), maxLimit);
+		} else {
+			// Falls das max noch nicht erreicht ist, aber nach links gegangen
+			// werden muss weil max nicht rechts liegt muessen alle Zahlen die
+			// bis zum erreich von max kommen mit abgezogen werden weil diese
+			// ausserhalb des bereiches der gewünschten summe liegen
+			int subtraktionsAkkumulation = current.getInhalt();
+			if (current.getRechts() != null) {
+				subtraktionsAkkumulation += current.getRechts().getSum();
+			}
+			return subtraktionsAkkumulation + getMaxRightside(current.getLinks(), maxLimit);
+		}
+	}
+
 	public static void main(String[] args) {
 
 		BaumVerlinkt<Integer> baum1 = new BaumVerlinkt<Integer>();
-		baum1.knotenEinfuegen(5);
-		baum1.knotenEinfuegen(10);
-		baum1.knotenEinfuegen(15);
-		baum1.knotenEinfuegen(20);
-		baum1.knotenEinfuegen(25);
-		baum1.knotenEinfuegen(30);
-		baum1.knotenEinfuegen(35);
-		baum1.knotenAusgeben(Reihenfolge.INORDER);
+		baum1.knotenEinfuegen(3);
+		baum1.knotenEinfuegen(2);
+		baum1.knotenEinfuegen(4);
+		baum1.knotenEinfuegen(1);
+		System.out.println(baum1.sumBetweenMinMax(2, 5));
 
 	}
 
