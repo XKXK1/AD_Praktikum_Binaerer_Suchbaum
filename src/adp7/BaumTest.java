@@ -21,6 +21,7 @@ public class BaumTest {
 		baumlinked.knotenEinfuegen(12);
 		baumlinked.knotenEinfuegen(14);
 		baumlinked.knotenEinfuegen(11);
+		
 
 		
 		int expectecBetween8and13 = 63;		
@@ -84,6 +85,7 @@ public class BaumTest {
 		baumlinked.knotenEinfuegen(3);
 		baumlinked.knotenEinfuegen(4);
 		baumlinked.knotenEinfuegen(5);
+
 		
 		//1 2 3 4 5
 		baumlinked.knotenAusgeben(Reihenfolge.INORDER);

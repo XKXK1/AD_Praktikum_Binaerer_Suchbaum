@@ -173,6 +173,8 @@ public class BaumVerlinkt<T extends Comparable<T>> implements Baum<T> {
 		
 	}
 
+
+
 	private int getSummeGroesserAlsMax(Knoten<Integer> current, int maxLimit) {
 		
 		if (current == null) {
@@ -201,6 +203,8 @@ public class BaumVerlinkt<T extends Comparable<T>> implements Baum<T> {
 			return subtraktionsAkkumulation + getSummeGroesserAlsMax(current.getLinks(), maxLimit);
 		}
 	}
+	
+	
 
 
 
