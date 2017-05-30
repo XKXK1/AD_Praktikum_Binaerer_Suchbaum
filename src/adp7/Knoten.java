@@ -2,7 +2,7 @@ package adp7;
 
 /**
  * 
- * @author Derya Uyargil
+ * @author Derya Uyargil  Andre Radtke
  * 
  *         Die generische Klasse Knoten, bietet Elemente(Knoten) zum einfuegen
  *         in einen Baum. Beim erstellen des Baums wird der Typ festgelegt.

@@ -2,7 +2,7 @@ package adp7;
 
 /**
  * 
- * @author Derya Uyargil
+ * @author Derya Uyargil  Andre Radtke
  * 
  *         Generische Schnittstelle zum erstellen einer Klasse eines Binaeren
  *         Baums. Die Schnittstelle verfuegt ueber zwei Methoden.
@@ -30,5 +30,17 @@ public interface Baum<T>  {
 	 *            Generische Variable die den Inhalt des Knotens repraesentiert.
 	 */
 	void knotenEinfuegen(T value);
+	
+	
+	/**
+	 * Diese Methode gibt die Summe von allen Zahlen zwischen zwei Werten in
+	 * einem Binaerbaum aus. Die zwei Werte kann der Anwender selbst angeben.
+	 * 
+	 * @param wurzel Die wurzel des Baums wird uebergeben.
+	 * @param min Die minimale Grenze zum berechnen der Summe.
+	 * @param max Die maximale Grenze zum berechnen der Summe.
+	 * @return
+	 */
+	int summeZwischenMinMax(int min, int max);
 
 }
