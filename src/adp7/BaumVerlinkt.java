@@ -13,9 +13,7 @@ package adp7;
  *
  */
 public class BaumVerlinkt<T extends Comparable<T>> implements Baum<T> {
-	Knoten<T> wurzel;
-	boolean insertSucces = false;
-	int position = 0;
+	private Knoten<T> wurzel;
 
 	@Override
 	public void knotenAusgeben(Reihenfolge reihenfolge) {
