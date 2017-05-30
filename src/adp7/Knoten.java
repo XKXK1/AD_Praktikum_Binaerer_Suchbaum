@@ -17,7 +17,7 @@ public class Knoten<T extends Comparable<T>> {
 
 	private Knoten<T> links;
 	private Knoten<T> rechts;
-	private Knoten<T> Vater;
+	private Knoten<T> vater;
 
 	public Knoten(T inhalt) {
 		sum =(int) inhalt;
@@ -35,9 +35,6 @@ public class Knoten<T extends Comparable<T>> {
 	        return sum;
 	    }
 	 
-	 public void setSum(int sum) {
-	        this.sum = sum;
-	    }
 
 	public T getInhalt() {
 		return inhalt;
@@ -60,11 +57,11 @@ public class Knoten<T extends Comparable<T>> {
 	}
 
 	public Knoten<T> getVater() {
-		return Vater;
+		return vater;
 	}
 
-	public void setVater(Knoten<T> vater) {
-		Vater = vater;
+	public void setVater(Knoten<T> vaterinc) {
+		vater = vaterinc;
 	}
 
 
